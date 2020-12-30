@@ -2,12 +2,24 @@
 <html lang="fi">
 <head>
   <meta charset="utf-8">
-  <title>EasyFit LesMills -aikataulut</title>
+  <title>Kaikki Suomen EasyFit -ryhmäliikuntatunnit</title>
   <link href="/client.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-  <div id="schedule-app">{{ react-rendered }}</div>
+  <header>
+    Kaikki Suomen <a href="https://www.easyfit.fi/fi"><img src="https://www.easyfit.fi/themes/easyfit2/logo.svg"></a> -ryhmäliikuntatunnit seuraavalle 7 päivälle
+  </header>
+
+  <main id="schedule-app">
+    {{ react-rendered }}
+    <p class="note">Huomaathan että lista ei sisällä virtuaalitunteja!</p>
+  </main>
+
+  <footer>
+    <p>Tämän palvelun on tehnyt vapaa-ajallaan <a href="https://twitter.com/p0ra">Heikki Pora</a>, joka halusi nähdä helposti missä on seuraava BODYPUMP-tunti.</p>
+    <p>Muista että <a href="https://www.sataako.fi/">Sataako.fi</a>-palvelusta näet kätevästi kastutko mennessäsi salille, vai vasta salilla.</p>
+  </footer>
   <script src="client.js" type="text/javascript"></script>
 </body>
 </html>

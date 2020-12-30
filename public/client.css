@@ -9,6 +9,47 @@ html, body {
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+}
+
+header {
+  background-color: #555555;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+header img {
+  margin: 0 10px;
+  height: 25px;
+}
+
+main {
+  margin: 0.5em;
+}
+
+main .note {
+  margin-top: 1em;
+  font-style: italic;
+}
+
+footer {
+  margin: 2em 0.5em 0.5em 0.5em;
+}
+
+footer a {
+  color: black;
+}
+
+footer a:hover {
+  color: #555555;
+}
+
 .training ol {
   list-style-type: none;
   padding: 0;
@@ -39,4 +80,8 @@ html, body {
 
 .training ol li span:nth-child(4) {
   width: 20em;
+}
+
+.training h2 {
+  color: #555555;
 }
