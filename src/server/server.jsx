@@ -7,7 +7,7 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import ScheduleView from './schedule-view'
 
-let SCHEDULE_CACHE = []
+let CACHED_INDEX = '<html></html>'
 const INTERVAL_HOURLY = 60 * 60 * 1000
 const RETRY_ONE_MINUTE = 60 * 1000
 
@@ -23,19 +23,18 @@ export async function initServer(port) {
     app.enable('trust proxy')
   }
 
-  const indexTemplate = await fs.promises.readFile(path.resolve('src/views/index.html'), 'utf8')
   await updateScheduleHourly()
 
-  app.get('/', (req, res) => {
-    res.send(indexTemplate.replace('{{ react-rendered }}', ReactDOMServer.renderToStaticMarkup(<ScheduleView schedule={SCHEDULE_CACHE}/>))) 
-  })
+  app.get('/', (req, res) => res.send(CACHED_INDEX))
 
   return new Promise(resolve => app.listen(port, resolve))
 }
 
 async function updateScheduleHourly() {
   try {
-    SCHEDULE_CACHE = await fetchSchedule()
+    const schedule = await fetchSchedule()
+    const template = await fs.promises.readFile(path.resolve('src/views/index.html'), 'utf8')
+    CACHED_INDEX = template.replace('{{ react-rendered }}', ReactDOMServer.renderToStaticMarkup(<ScheduleView schedule={schedule}/>))
     setTimeout(updateScheduleHourly, INTERVAL_HOURLY)
   } catch (err) {
     console.error(err)
