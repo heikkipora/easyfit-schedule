@@ -11,7 +11,7 @@ function parseDayTableBody($, location, element) {
   const $tbody = $(element)
   const day = new Date(Number($tbody.attr('id').replace('day_', '')) * 1000)
   const parseRowFn = parseDayTableRow.bind(null, $, location, day)
-  return $tbody.find('.tr-row').get().map(parseRowFn)
+  return $tbody.find('.tr-row:not(.extra_row)').get().map(parseRowFn)
 }
 
 function parseDayTableRow($, location, day, element) {
@@ -23,6 +23,10 @@ function parseDayTableRow($, location, day, element) {
   const instructorName = $tr.find('td.c_instructor').text().trim()
   const from = $tr.find('td.c_time_from').text().split('-')[0].trim()
   const to = $tr.find('td.c_time_to').text()
+  const isVirtual = instructorName.toLowerCase().includes('virtuaali') ||
+                    trainingName.toLowerCase().includes('virtuaali') ||
+                    trainingName.toLowerCase().includes('virtual') ||
+                    trainingName.toLowerCase().includes('omavalintainen')
   return {
     id,
     instructor: {
@@ -31,7 +35,9 @@ function parseDayTableRow($, location, day, element) {
     },
     training: {
       name: trainingName,
-      code: trainingCode
+      baseName: trainingName.replace('®', ' ').split(' ')[0],
+      code: trainingCode,
+      isVirtual
     },
     time: {
       day,
