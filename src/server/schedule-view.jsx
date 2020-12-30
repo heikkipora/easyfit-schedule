@@ -36,5 +36,10 @@ function groupByTraining(entries) {
 }
 
 function caseInsensitiveSort(a, b) {
-  return a.toLowerCase().localeCompare(b.toLowerCase())
+  if (a.toLowerCase() > b.toLowerCase()) {
+    return 1
+  } else if (a.toLowerCase() < b.toLowerCase()) {
+    return -1
+  }
+  return 0
 }
