@@ -11,36 +11,36 @@ html, body {
 
 body {
   margin: 0;
-  width: 46em;
 }
 
 header {
   background-color: #555555;
+}
+
+header div {
+  margin: 0 auto;
+  width: 46em;
   color: white;
   display: flex;
   align-items: center;
-  padding: 0 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-header img {
+header div img {
   margin: 0 2px 0 10px;
   height: 25px;
 }
 
 main {
-  margin: 0.5em;
-}
-
-main .note {
-  margin-top: 1em;
-  font-style: italic;
+  margin: 0 auto;
+  width: 46em;
 }
 
 footer {
-  margin: 2em 0.5em;
+  margin: 3em auto;
+  width: 46em;
 }
 
 footer a {
