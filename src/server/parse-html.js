@@ -58,7 +58,11 @@ function normalizeName(trainingName) {
     .replace(/zumba.*/i, 'ZUMBA')
     .replace('  ', ' ')
     .replace('BODYBALANCE Flexibility', 'BODYBALANCE')
+    .replace('Bodypumpmix', 'BODYPUMP')
+    .replace('Reidet Vatsa Pakarat', 'RVP')
     .trim()
+    .replace(/^Spinning$/, 'Spinning / Sisäpyöräily')
+    .replace(/^Sisäpyöräily$/, 'Spinning / Sisäpyöräily')
 }
 
 export function parseLocationListDocument(html) {
