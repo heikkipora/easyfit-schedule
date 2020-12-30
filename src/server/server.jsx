@@ -11,12 +11,15 @@ let SCHEDULE_CACHE = []
 const INTERVAL_HOURLY = 60 * 60 * 1000
 const RETRY_ONE_MINUTE = 60 * 1000
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+
 export async function initServer(port) {
   const app = express()
   app.disable('x-powered-by')
+  app.use(forceHttps)
   app.use(compression())
   app.use(express.static('public'))
-  if (process.env.NODE_ENV == 'production') {
+  if (IS_PRODUCTION) {
     app.enable('trust proxy')
   }
 
@@ -38,4 +41,12 @@ async function updateScheduleHourly() {
     console.error(err)
     setTimeout(updateScheduleHourly, RETRY_ONE_MINUTE)
   }
+}
+
+function forceHttps(req, res, next) {
+  if (IS_PRODUCTION && !req.secure) {
+    res.redirect(`https://${req.hostname}${req.originalUrl}`)
+    return
+  }
+  next()
 }
