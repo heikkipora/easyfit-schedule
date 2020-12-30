@@ -35,7 +35,7 @@ function parseDayTableRow($, location, day, element) {
     },
     training: {
       name: trainingName,
-      baseName: trainingName.replace('®', ' ').split(' ')[0],
+      baseName: normalizeName(trainingName),
       code: trainingCode,
       isVirtual
     },
@@ -46,6 +46,15 @@ function parseDayTableRow($, location, day, element) {
     },
     location
   }
+}
+
+function normalizeName(trainingName) {
+  return trainingName
+    .replace('®', ' ')
+    .replace(/\d\d/, '')
+    .replace("'", '')
+    .replace('  ', ' ')
+    .trim()
 }
 
 export function parseLocationListDocument(html) {
