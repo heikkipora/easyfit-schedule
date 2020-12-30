@@ -15,7 +15,15 @@ const client = axios.create({
 export async function fetchSchedule() {
   const locations = await fetchLocationList()
   const schedule = await Promise.map(locations, fetchLocationSchedule, {concurrency: 4})
-  return schedule.flat()
+  return filterSchedule(schedule.flat())
+}
+
+function filterSchedule(schedule) {
+  return schedule
+    .filter(s => !s.training.isVirtual &&
+                 s.training.code !== 'PTT' &&
+                 s.training.code !== 'EF_YKS' &&
+                 !s.training.name.includes('Sali varattu'))
 }
 
 async function fetchLocationList() {

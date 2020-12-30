@@ -3,13 +3,7 @@ import {format} from 'date-fns'
 import React from 'react'
 
 export default function ScheduleView({schedule}) {
-  const filteredEntries = schedule
-    .filter(s => !s.training.isVirtual &&
-                  s.training.code !== 'PTT' &&
-                  s.training.code !== 'EF_YKS' &&
-                  !s.training.name.includes('Sali varattu'))
-
-  const grouped = groupByTraining(filteredEntries)
+  const grouped = groupByTraining(schedule)
   const trainingNames = Object.keys(grouped).sort(caseInsensitiveSort)
   return trainingNames.map(renderTraining.bind(null, grouped))
 }
@@ -36,9 +30,11 @@ function groupByTraining(entries) {
 }
 
 function caseInsensitiveSort(a, b) {
-  if (a.toLowerCase() > b.toLowerCase()) {
+  const aLower = a.toLowerCase()
+  const bLower = b.toLowerCase()
+  if (aLower > bLower) {
     return 1
-  } else if (a.toLowerCase() < b.toLowerCase()) {
+  } else if (aLower < bLower) {
     return -1
   }
   return 0
