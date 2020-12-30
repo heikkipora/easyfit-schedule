@@ -10,7 +10,7 @@ export default function ScheduleView({schedule}) {
                   !s.training.name.includes('Sali varattu'))
 
   const grouped = groupByTraining(filteredEntries)
-  const trainingNames = Object.keys(grouped).sort()
+  const trainingNames = Object.keys(grouped).sort(caseInsensitiveSort)
   return trainingNames.map(renderTraining.bind(null, grouped))
 }
 
@@ -33,4 +33,8 @@ function groupByTraining(entries) {
     (acc[entry.training.baseName] = acc[entry.training.baseName] || []).push(entry)
     return acc
   }, {})
+}
+
+function caseInsensitiveSort(a, b) {
+  return a.toLowerCase().localeCompare(b.toLowerCase())
 }
