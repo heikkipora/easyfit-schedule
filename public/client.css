@@ -19,7 +19,8 @@ header {
 
 header div {
   margin: 0 auto;
-  width: 46em;
+  width: 684px;
+  font-size: 24px;
   color: white;
   display: flex;
   align-items: center;
@@ -29,18 +30,18 @@ header div {
 }
 
 header div img {
-  margin: 0 2px 0 10px;
-  height: 25px;
+  margin: 4px 4px 0 12px;
+  height: 28px;
 }
 
 main {
   margin: 0 auto;
-  width: 46em;
+  width: 684px;
 }
 
 footer {
-  margin: 3em auto;
-  width: 46em;
+  margin: 42px auto;
+  width: 684px;
 }
 
 footer a {
@@ -61,26 +62,26 @@ footer a:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 0.5em;
+  margin-right: 8px;
 }
 
 
 .training ol li span:nth-child(1) {
   text-align: right;
-  width: 4.5em;
+  width: 72px;
 }
 
 .training ol li span:nth-child(2) {
   text-align: right;
-  width: 6em;
+  width: 96px;
 }
 
 .training ol li span:nth-child(3) {
-  width: 12em;
+  width: 180px;
 }
 
 .training ol li span:nth-child(4) {
-  width: 20em;
+  width: 280px;
 }
 
 .training h2 {
