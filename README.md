@@ -6,4 +6,4 @@ Requires:
  - node.js v14+
 
 
-Kaffeinate (http://kaffeine.herokuapp.com/) keeps the app running (except for a six hour bed-time starting at 22:00 GMT)
+Kaffeinate (http://kaffeine.herokuapp.com/) keeps the app running (except for a six hour bed-time starting at 22:00 GMT) on https://easyfit-schedule.herokuapp.com
