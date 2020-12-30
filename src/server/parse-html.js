@@ -51,9 +51,13 @@ function parseDayTableRow($, location, day, element) {
 function normalizeName(trainingName) {
   return trainingName
     .replace('®', ' ')
-    .replace(/\d\d/, '')
-    .replace("'", '')
+    .replace(/\'?\d\d\'?/, '')
+    .replace(/core.*/i, 'CORE')
+    .replace(/.*pilates.*/i, 'Pilates')
+    .replace(/crosstraining/i, 'Cross Training')
+    .replace(/zumba.*/i, 'ZUMBA')
     .replace('  ', ' ')
+    .replace('BODYBALANCE Flexibility', 'BODYBALANCE')
     .trim()
 }
 
