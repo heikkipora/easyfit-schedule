@@ -25,7 +25,10 @@ export async function initServer(port) {
 
   await updateScheduleHourly()
 
-  app.get('/', (req, res) => res.send(CACHED_INDEX))
+  app.get('/', (req, res) => {
+    res.set('Cache-Control', 'public, max-age=60');
+    res.send(CACHED_INDEX)
+  })
 
   return new Promise(resolve => app.listen(port, resolve))
 }
