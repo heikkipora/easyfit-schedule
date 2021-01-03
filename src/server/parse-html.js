@@ -58,11 +58,17 @@ function normalizeName(trainingName) {
     .replace(/zumba.*/i, 'ZUMBA')
     .replace('  ', ' ')
     .replace('BODYBALANCE Flexibility', 'BODYBALANCE')
-    .replace('Bodypumpmix', 'BODYPUMP')
+    .replace(/Bodypump.*/, 'BODYPUMP')
+    .replace(/Kahvakuula.*/, 'Kahvakuula')
     .replace('Reidet Vatsa Pakarat', 'RVP')
     .trim()
     .replace(/^Spinning$/, 'Spinning / Sisäpyöräily')
     .replace(/^Sisäpyöräily$/, 'Spinning / Sisäpyöräily')
+    .replace(/^Body$/, 'BODY')
+    .replace('Kehonhuolto/Venyttely', 'Kehonhuolto')
+    .replace('Yin jooga', 'Yin Jooga')
+    .replace('Pumppi', 'PUMPPI')
+    .replace(/^Pump$/, 'PUMPPI')
 }
 
 export function parseLocationListDocument(html) {
