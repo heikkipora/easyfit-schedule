@@ -3,6 +3,9 @@ import {format} from 'date-fns'
 import React from 'react'
 
 export default function ScheduleView({schedule}) {
+  if (schedule.length === 0) {
+    return <p><i>Kalenterin haku kesken, odota hetki...</i></p>
+  }
   const grouped = groupByTraining(schedule)
   const trainingNames = Object.keys(grouped).sort(caseInsensitiveSort)
   return trainingNames.map(renderTraining.bind(null, grouped))
