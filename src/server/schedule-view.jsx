@@ -19,6 +19,7 @@ function renderTraining(grouped, trainingName) {
         <span>{format(s.time.day, 'EEEEEE dd.MM.', {locale: fi})}</span>
         <span>{s.time.from} - {s.time.to}</span>
         <span>{s.training.name}</span>
+        <span>{s.reservation}</span>
         <span>{s.location.name}{s.instructor.name ? ` (${s.instructor.name})` : ''}</span>
       </li>)}
     </ol>

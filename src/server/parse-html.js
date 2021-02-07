@@ -23,6 +23,7 @@ function parseDayTableRow($, location, day, element) {
   const instructorName = $tr.find('td.c_instructor').text().trim()
   const from = $tr.find('td.c_time_from').text().split('-')[0].trim()
   const to = $tr.find('td.c_time_to').text()
+  const reservation = normalizeReservation($tr.find('td.c_rsv_counts').text().trim())
   const isVirtual = instructorName.toLowerCase().includes('virtuaali') ||
                     trainingName.toLowerCase().includes('virtuaali') ||
                     trainingName.toLowerCase().includes('virtual') ||
@@ -44,8 +45,17 @@ function parseDayTableRow($, location, day, element) {
       from,
       to
     },
+    reservation,
     location
   }
+}
+
+// value can be '5/23(30)' or '3(15)'
+function normalizeReservation(value) {
+  if(value.includes('/')) {
+    return value.split('(')[0]
+  }
+  return value.replace('(', '/').replace(')', '')
 }
 
 function normalizeName(trainingName) {
