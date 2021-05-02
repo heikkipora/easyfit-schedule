@@ -91,5 +91,9 @@ function parseLocationListLink($, element) {
   const $a = $(element)
   const [id] = $a.attr('href').replace('https://varaus.easyfit.fi/', '').split('/')
   const name = $a.text()
-  return {id, name}
+  return {id: fixBroken(id), name}
+}
+
+function fixBroken(id) {
+  return id.replace(/^ef_ef_/, 'ef_')
 }
