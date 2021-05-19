@@ -27,6 +27,16 @@ export async function initServer(port) {
 
   updateScheduleHourly()
 
+  app.get('/index.json', (req, res) => {
+    res.json(CACHED_SCHEDULE)
+  })
+
+  app.get('/:code', (req, res) => {
+    res.set('Cache-Control', 'public, max-age=60');
+    const page = template.replace('{{ react-rendered }}', ReactDOMServer.renderToStaticMarkup(<ScheduleView schedule={filtererSchedule(req.params)}/>))
+    res.send(page)
+  })
+
   app.get('/', (req, res) => {
     res.set('Cache-Control', 'public, max-age=60');
     const page = template.replace('{{ react-rendered }}', ReactDOMServer.renderToStaticMarkup(<ScheduleView schedule={CACHED_SCHEDULE}/>))
@@ -34,6 +44,10 @@ export async function initServer(port) {
   })
 
   return new Promise(resolve => app.listen(port, resolve))
+}
+
+function filtererSchedule({code}) {
+  return CACHED_SCHEDULE.filter(s => s.instructor.code.toLowerCase() === code.toLowerCase() )
 }
 
 async function updateScheduleHourly() {
