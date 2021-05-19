@@ -32,9 +32,14 @@ async function fetchLocationList() {
 }
 
 async function fetchLocationSchedule(location) {
-  const sessionId = await fetchSessionId(location.id)
-  const {data} = await client(urlPath(location.id), {headers: {Cookie: `php_time_offset=%2B2; all_rsvs_fetched=1; PHPSESSID=${sessionId}`}})
-  return parseLocationDocument(data, location)
+  try {
+    const sessionId = await fetchSessionId(location.id)
+    const {data} = await client(urlPath(location.id), {headers: {Cookie: `php_time_offset=%2B2; all_rsvs_fetched=1; PHPSESSID=${sessionId}`}})
+    return parseLocationDocument(data, location)
+  } catch (err) {
+    console.log(`Failed to fetch schedule for '${location.id}' because of: ${err.message}`)
+    return []
+  }
 }
 
 async function fetchSessionId(locationId) {
