@@ -23,6 +23,8 @@ function filterSchedule(schedule) {
     .filter(s => !s.training.isVirtual &&
                  s.training.code !== 'PTT' &&
                  s.training.code !== 'EF_YKS' &&
+                 s.training.name !== 'Kesäpistekisa' &&
+                 s.training.name !== 'Kuntosali' &&
                  !s.training.name.includes('Sali varattu'))
 }
 
